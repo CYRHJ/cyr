@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单</title>
+		<meta name="viewport" content="width=device-width" />
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<style>
+			body,h1,h2,h3,h4,h5,h6,hr,p,ul,ol,li,pre,button,input,textarea {margin:0;padding:0;}
+			body{font-size: 12px; color: #000; background: #eee;}
+			ul,li{list-style: none;}
+			a{text-decoration: none;}
+			a:hover{color: #000;}
+			.list{display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;}
+			.list .item{width: 30%; height:auto; }
+			.list .item img{width: 100%; height:auto;}
+		</style>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			
+			//refs 获取真实的dom节点
+			let LikeButton = React.createClass({
+				getInitialState:function(){
+					return{
+						listArr:[]
+						}
+					
+					
+				},
+				componentDidMount:function(){
+					$.get(this.props.url,function(data){
+						console.log(data);
+						this.setState({
+							listArr:data.data.item_list
+						})
+						
+					}.bind(this))
+					
+				},
+				render:function(){
+					return (
+						<ul className="list">
+							{
+								this.state.listArr.map((item)=><li className="item">
+									<img src={item.over_image_url} />
+									<div>{item.item_name}</div>
+								</li>)
+							}
+						</ul>
+					)
+				}
+				
+			})
+			
+			
+			ReactDOM.render(<LikeButton url="https://h5.watsons.com.cn/item/ws/group_list?current_page=1&page_size=24&group_id=12779&device_id=c95d07a0-0a41-11e9-8aa5-a97960627611"/>,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

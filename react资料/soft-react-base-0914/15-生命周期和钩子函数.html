@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>生命周期和钩子函数</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//react的声明周期：react组件从创建到销毁的全过程
+			//react的声明周期包含三个部分：
+			/*
+			 	1. Mounting：已插入真实 DOM
+				2. Updating：正在被重新渲染
+				3. Unmounting：已移出真实 DOM
+			 * */
+			
+			/*钩子函数：
+			 */
+			let LikeButton = React.createClass({
+				//设定初始值
+				getInitialState:function(){
+					console.log('getInitialState 执行了');
+					return {liked:true}
+				},
+				//挂载完成时执行
+				componentDidMount:function(){
+					console.log('componentDidMount 执行了');
+				},
+				//挂载前执行
+				componentWillMount:function(){
+					console.log('componentWillMount 执行了');
+				},
+//				//更新前执行
+				componentWillUpdate:function(){
+					console.log('componentWillUpdate 执行了');
+				},
+				//更新后执行
+				componentDidUpdate:function(){
+					console.log('componentDidUpdate 执行了');
+				},
+				//shouldComponentUpdate 如果这个钩子函数运行了，会阻止 componentWillUpdate 、render、componentDidUpdate 运行
+				//react的性能调优的
+				shouldComponentUpdate:function(nextProps,nextState){
+					console.log(nextState);
+					console.log(this.state.liked);
+					console.log('shouldComponentUpdate 运行了！');
+					return this.state.liked !== nextState.liked;
+				},
+				componentWillReceiveProps:function(){
+					console.log('componentWillReceiveProps 执行了');
+					
+					
+				},
+				changeLiked:function(){
+					console.log('更改');
+					//更新liked的值,下面这句不ok，因为 这样的直接赋值，没有重新调用 render
+					//this.state.liked = !this.state.liked;
+					//更新状态时需要使用 setState ，因为setState 不仅仅做了赋值操作，还再一次触发了 render重新渲染页面
+					this.setState({
+						liked:false
+					})
+				},
+				//当组件销毁时运行
+				componentWillUnmount:function(){
+					console.log('componentWillUnmount 执行了');
+					//alert('componentWillUnmount 执行了');
+				},
+				render:function(){
+					console.log('render 执行了');
+					//this.state.****   获取状态值
+					return <div>
+						<input type="button" onClick={this.changeLiked}  value="是否喜欢我"/>
+						<h1>你{this.state.liked?'喜欢':'不喜欢'}我</h1>
+						
+					</div>
+					
+				}
+				
+			})
+			ReactDOM.render(<LikeButton/>,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

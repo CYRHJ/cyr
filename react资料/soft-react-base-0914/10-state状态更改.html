@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>state状态更改</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			let LikeButton = React.createClass({
+				//设定初始值
+				getInitialState:function(){
+					return {liked:true}
+				},
+				changeLiked:function(){
+					console.log('更改');
+					//更新liked的值,下面这句不ok，因为 这样的直接赋值，没有重新调用 render
+					//this.state.liked = !this.state.liked;
+					//更新状态时需要使用 setState ，因为setState 不仅仅做了赋值操作，还再一次触发了 render重新渲染页面
+					this.setState({
+						liked:!this.state.liked
+					})
+				},
+				render:function(){
+					//this.state.****   获取状态值
+					return <div>
+						<input type="button" onClick={this.changeLiked}  value="是否喜欢我"/>
+						<h1>你{this.state.liked?'喜欢':'不喜欢'}我</h1>
+						
+					</div>
+					
+				}
+				
+			})
+			ReactDOM.render(<LikeButton/>,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

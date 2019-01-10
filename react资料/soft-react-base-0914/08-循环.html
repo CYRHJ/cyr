@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>标签和组件的区别</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+		<style>
+			.myClass{color:red;background: green;}
+		</style>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//创建组件
+			//className  添加样式
+			let  myArr = [
+				{"id":"001","name":"花儿"},
+				{"id":"002","name":"杨幂"},
+				{"id":"003","name":"刘恺威"}
+			];
+			//注意：组件名的首字母必须大写
+			let MyElem = React.createClass({
+				render:function(){
+					return <h2 >
+						<ul>
+						{
+							myArr.map(function(item){
+								return <li className="myClass">{item.id}--{item.name}</li>
+							})
+						}
+						</ul>
+					</h2>
+				}
+			});
+			//渲染到页面
+			ReactDOM.render(<MyElem />,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

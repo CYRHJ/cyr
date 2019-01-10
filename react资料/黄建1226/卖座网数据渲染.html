@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,ul,ol,li,pre,button,input,textarea{margin: 0;padding: 0;}
+        body{font-size: 12px;color: #000;background: #eee;}
+        ul li{list-style: none;}
+        a{text-decoration: none;}
+        a:hover{color: #000;}
+        .film-item{margin: 5px;width: 90%}
+        .film-item img{width: 100%; height: auto;}
+        .film-item .film-text{height: 50px; background: #fff; padding-top: 5px;padding-left: 5px;}
+        .film-item .film-count{color: #ccc}
+    </style>
+</head>
+<body>
+    <div id="exap"></div>
+    <script type="text/babel">
+    //正在热映
+        let Nowplaying = React.createClass({
+            render:function () {
+                let nowPlayingArr = [{"id":4311,"name":"碟中谍6：全面瓦解","cover":{"origin":"https://pic.maizuo.com/usr/movie/f250c1b1b54861e1d81bcb532d42fd93.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/4733acd323f10449cf83cd49ea240110.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/4733acd323f10449cf83cd49ea240110.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"全面瓦解","premiereAt":1535644800000,"grade":"8.5","watchCount":0,"cinemaCount":217,"scheduleCount":4746,"isPromotion":true,"isNowPlaying":true,"isComingSoon":"","isPresold":""},{"id":4356,"name":"阿尔法：狼伴归途","cover":{"origin":"https://pic.maizuo.com/usr/movie/b355fb24a76b25fe7baac548cf660d19.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/d59714f3db7ee5188eda9b4711e8bd7b.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/d59714f3db7ee5188eda9b4711e8bd7b.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"狼性仁心  非凡历险","premiereAt":1536249600000,"grade":"8.5","watchCount":0,"cinemaCount":217,"scheduleCount":2139,"isPromotion":true,"isNowPlaying":true,"isComingSoon":"","isPresold":""},{"id":4360,"name":"黄金兄弟","cover":{"origin":"https://pic.maizuo.com/usr/movie/89e79e0e2560f5d26e695b476e8997fd.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/7affbfe709c89903bb2a08880841513d.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/7affbfe709c89903bb2a08880841513d.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"好兄弟 有今生  有来世","premiereAt":1537459200000,"grade":"8.0","watchCount":0,"cinemaCount":7,"scheduleCount":73,"isPromotion":true,"isNowPlaying":true,"isComingSoon":"","isPresold":""},{"id":4355,"name":"传奇的诞生","cover":{"origin":"https://pic.maizuo.com/usr/movie/56e484a7b91e59d1b005dfa93c80482f.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/56e484a7b91e59d1b005dfa93c80482f.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/56e484a7b91e59d1b005dfa93c80482f.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"梦想造就王者   奋斗成就传奇","premiereAt":1536249600000,"grade":"8.0","watchCount":0,"cinemaCount":193,"scheduleCount":960,"isPromotion":true,"isNowPlaying":true,"isComingSoon":"","isPresold":""},{"id":4365,"name":"李宗伟：败者为王","cover":{"origin":"https://pic.maizuo.com/usr/movie/d15469628d30ef35d0275decf520711e.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/d15469628d30ef35d0275decf520711e.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/d15469628d30ef35d0275decf520711e.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"相信那些相信你可以的人","premiereAt":1536249600000,"grade":"7.2","watchCount":0,"cinemaCount":106,"scheduleCount":284,"isPromotion":true,"isNowPlaying":true,"isComingSoon":"","isPresold":""}];       
+                return <ul>{
+                    nowPlayingArr.map((item)=><FilmItem item={item} type="NOWPLAYING"/>)
+                    }</ul>
+            }
+        });
+        //即将上映
+        let Comingsoon = React.createClass({
+            render:function () {
+                let commingSoonArr = [{"id":4360,"name":"黄金兄弟","cover":{"origin":"https://pic.maizuo.com/usr/movie/89e79e0e2560f5d26e695b476e8997fd.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/7affbfe709c89903bb2a08880841513d.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/7affbfe709c89903bb2a08880841513d.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"好兄弟 有今生  有来世","premiereAt":1537459200000,"grade":"8.0","watchCount":0,"cinemaCount":0,"scheduleCount":0,"isPromotion":true,"isNowPlaying":"","isComingSoon":true,"isPresold":""},{"id":4186,"name":"低压槽：欲望之城","cover":{"origin":"https://pic.maizuo.com/usr/movie/8340b722e6472470d02138656c623806.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/a6e3e55f806bf57bbe1fcf49f168d3ff.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/a6e3e55f806bf57bbe1fcf49f168d3ff.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"真相往往不止一层","premiereAt":1546185600000,"grade":"8.3","watchCount":72396,"cinemaCount":0,"scheduleCount":0,"isPromotion":true,"isNowPlaying":"","isComingSoon":true,"isPresold":""},{"id":4379,"name":"美丽战争","cover":{"origin":"https://pic.maizuo.com/usr/movie/338daae5a880b9785a52454ea30fe522.jpg"},"poster":{"origin":"https://pic.maizuo.com/usr/movie/0c4caed8638508dfbbe5a7fceba92247.jpg","thumbnail":"https://pic.maizuo.com/usr/movie/0c4caed8638508dfbbe5a7fceba92247.jpg?x-oss-process=image/resize,m_fixed,h_0,w_300"},"intro":"伤口不会痛一辈子 但遗憾会 ","premiereAt":1536854400000,"grade":"8.0","watchCount":0,"cinemaCount":0,"scheduleCount":0,"isPromotion":true,"isNowPlaying":"","isComingSoon":true,"isPresold":""}];
+                return <ul>{
+                    commingSoonArr.map((item)=><FilmItem item={item} type="COMINGSOON"/>)
+                }
+                </ul>
+            }
+        });
+        let FilmItem =React.createClass({
+            changeTime:function(time){
+                var date = new Date(time);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+					var Y = date.getFullYear(time) + '-';
+					var M = (date.getMonth(time)+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+					var D = date.getDate(time) + ' ';
+					return Y+M+D
+            },
+            render:function(){
+                const {item,type}=this.props; //结构=>相当于 const item=this.props.item
+                return <li className="film-item">
+                            <img src={item.cover.origin}/>
+                            <div className="file-text">
+                                {item.name}<br/>
+                                {
+                                    type=="NOWPLAYING"?
+                                    <span className="film-count">{item.cinemaCount}家上映,{item.watchCount}人购票</span>
+                                    :<span className="film-count">{this.changeTime(item.premiereAt)}上映</span>
+                                }
+                            </div>
+                    </li>
+            }
+        });
+        //渲染到页面上
+        ReactDOM.render(
+            <div>
+                <Nowplaying/>    
+                <Comingsoon/>
+            </div>
+            ,document.getElementById("exap"));
+    </script>
+</body>
+</html>

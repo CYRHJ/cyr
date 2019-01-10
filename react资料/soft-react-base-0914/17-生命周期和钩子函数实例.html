@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>生命周期和钩子函数</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			
+			let LikeButton = React.createClass({
+				//设定初始值
+				getInitialState:function(){					
+					return {opacity:1}
+				},
+				//挂载完成时执行
+				componentDidMount:function(){
+					//调用定时器
+					let _this = this;
+					//this指向出问题时，我们的解决方式：
+					/*
+					 
+					 * 1.setInterval 的里面的函数写成箭头函数的形式
+					 * 2.setInterval 的里面的函数使用 bind绑定this
+					 * 3.将this在 setInterval 之前进行保存
+					 * */
+					//第二种方式
+//					setInterval(function(){
+//						//console.log(this);
+//						let myOpacity = this.state.opacity;
+//						//值需要自减
+//						myOpacity -= 0.05;
+//						//判断如果到最小了，那么赋值为1
+//						if(myOpacity <= 0.01){
+//							myOpacity = 1;
+//						}
+//						//修改 state的数据
+//						this.setState({
+//							opacity:myOpacity
+//						})
+//					}.bind(this),100);
+					
+					//第三种方式
+					setInterval(function(){
+						//console.log(this);
+						let myOpacity = _this.state.opacity;
+						//值需要自减
+						myOpacity -= 0.05;
+						//判断如果到最小了，那么赋值为1
+						if(myOpacity <= 0.01){
+							myOpacity = 1;
+						}
+						//修改 state的数据
+						_this.setState({
+							opacity:myOpacity
+						})
+					},100);
+					
+					
+				},
+				
+				render:function(){
+					
+					return <div style={{'opacity':this.state.opacity}}>
+						hello world!
+						
+					</div>
+					
+				}
+				
+			})
+			ReactDOM.render(<LikeButton/>,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

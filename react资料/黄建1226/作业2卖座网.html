@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="maizuowang.js"></script>
+    <script src="moment.js"></script>
+    <style>
+       *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+       }
+        .cover,.cover img{
+            width: 100%;
+            height: auto;
+        }
+        .grade{
+            display: flex;
+            justify-content: space-between;
+        }
+        .grade :nth-child(2){
+            color:rgb(238, 78, 50);
+            font-size: 20px;
+        }
+        .psp{
+            height: 84px;
+        }
+        .header{
+            width: 100%; 
+            height: 50px;
+            background:#282828; 
+            position: fixed; 
+			top:0;
+            left:0;
+            line-height:50px; 
+            color:#fff;
+            padding-left: 20px;}
+		.list{
+            background:#282828; 
+            position: fixed; 
+			top:50px;
+            left:0; 
+            bottom:0; 
+            right:110px;  
+            color:#fff;
+            transition: right ease 0.5s;
+			overflow: hidden;
+         }
+    </style>
+</head>
+<body>
+    <div id="exap"></div>
+    <script type="text/babel">
+        moment().format();
+        let WebSite = React.createClass({
+            render:function(){
+                return <div>
+                    <List/>
+                    <Nowplaying />
+                    <Comingsoon/>
+					</div>
+				}
+            });
+            let List =React.createClass({
+                getInitialState:function(){
+                    return{liked:false}
+                },
+                changeLiked:function(){
+                    this.setState({
+                        liked:!this.state.liked
+                    })
+                },
+                render:function(){
+                    return <div>
+                            <div className="header" onClick={this.changeLiked}>卖座网</div>
+                            <div className="list" style={this.state.liked?{'right':'30%'}:{'right':'100%'}}></div>
+                    </div>
+                }
+            });
+            let Nowplaying =React.createClass({
+                render:function () {
+                    console.log(nowPlayingArr)
+                    return <div className="nowplaying">{
+                        nowPlayingArr.map(function(item){
+                            return <li>
+                                        <div className="cover">
+                                            <img src={item.cover.origin}/>
+                                        </div>
+                                        <div className="psp">
+                                            <p className="grade"><span>{item.name}</span><span>{item.grade}</span></p><br/>
+                                            <span className="">{item.cinemaCount}家影院上映{item.scheduleCount}人购票</span>
+                                            <span>上映时间：{moment(item.premiereAt).format('YYYY-MM-DD')}</span>
+                                        </div>
+                                   </li>
+                        })
+                }</div>
+            }
+        });
+        let Comingsoon =React.createClass({
+            render:function () {
+                console.log(commingSoonArr)
+                return <div className="comingsoon">{
+                        commingSoonArr.map(function(item){
+                            return <li>
+                                        <div className="cover">
+                                            <img src={item.cover.origin}/>
+                                        </div>
+                                        <div className="psp">
+                                            <p className="grade"><span>{item.name}</span><span>{item.grade}</span></p><br/>
+                                            <span className="">{item.cinemaCount}家影院上映{item.scheduleCount}人购票</span>
+                                            <span>{moment(item.premiereAt).format('YYYY-MM-DD')}上映</span>
+                                        </div>
+                                   </li>
+                        })
+                }</div>
+            }
+        });
+        ReactDOM.render(<WebSite/>,document.getElementById('exap'))
+    
+    </script>
+</body>
+</html>

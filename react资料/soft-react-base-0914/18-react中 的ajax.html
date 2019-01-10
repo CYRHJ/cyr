@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//创建对象
+			let LikeButton = React.createClass({
+				//设置初始值
+				getInitialState:function(){
+					return {
+						url:'',
+						login:''
+					}
+				},
+				componentDidMount:function(){
+					this.result = $.get(this.props.url,function(data){
+						console.log(data);
+						this.setState({
+							url:data[0].url,
+							login:data[0].owner.login
+						})
+						
+					}.bind(this))
+				},
+				//当页面关闭时将没进行完的ajax停止
+				componentWillUnmount:function(){
+					this.result.abort();
+				},
+				
+				render:function(){
+					return (
+						<div>
+							网址:{this.state.url}<br/>
+							用户:{this.state.login}
+						</div>
+					)
+				}
+				
+			})
+			
+			
+			ReactDOM.render(<LikeButton url="https://api.github.com/users/octocat/gists"/>,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

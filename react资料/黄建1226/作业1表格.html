@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        table{
+            border-top: 1px solid red;
+            border-left: 1px solid red;
+            border-collapse: collapse;
+            width: 400px;
+            height: 200px;
+        }
+        td{
+            border-bottom: 1px solid red;
+            border-right: 1px solid red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="exap"></div>
+    <script type="text/babel">
+        let Arr = [
+            {'id':'学号',"name":"姓名","sex":"性别","age":"年龄","mingzu":"名族"},
+            {'id':'01',"name":"张三","sex":"男","age":"21","mingzu":"汉"},
+            {'id':'02',"name":"李四","sex":"女","age":"22","mingzu":"汉"},
+            {'id':'03',"name":"王五","sex":"男","age":"20","mingzu":"汉"},
+            {'id':'04',"name":"陈六","sex":"男","age":"21","mingzu":"汉"},
+
+        ];
+        let Myelem =React.createClass({
+            render:function () {
+                return <table>
+                        {
+                            Arr.map(function(item){
+                                return<tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.sex}</td>
+                                    <td>{item.age}</td>
+                                    <td>{item.mingzu}</td>
+                                    </tr>
+                            })
+                        }
+                </table>
+            }
+        });
+        ReactDOM.render(<Myelem/>,document.getElementById('exap'));
+    </script>
+</body>
+</html>

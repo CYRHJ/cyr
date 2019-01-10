@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>helloworld</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//text/babel 解析 jsx语法
+			//声明react
+			//render 渲染节点
+			var  i = 5;
+			
+			//创建样式的对象
+			var myColor = {'color':'blue'};
+			//创建数组
+			var myArr = [<h1>aaaaa</h1>,<h2>bbbb</h2>];
+			//注意：根节点只能有一个
+			//单大括号渲染变量
+			ReactDOM.render(
+				/*我是根节点外面的注释*/
+				<div>
+					{/*我是根节点里面的注释*/}
+					<h1 style={myColor}>hello world!</h1>
+					<h1 style={{"fontSize":"40px","backgroundColor":"red"}}>我是一个标题</h1>
+					<div>{1+1}</div>
+					<div>{i+1}</div>
+					<div>{i = i+1}</div>
+					<div>{i>5?'true':'false'}</div>
+					{myArr}
+				</div>
+				,document.getElementById('exap'));
+			//ReactDOM.render(<div>hello world!</div>,document.getElementsByClassName('myClass')[0]);
+		</script>
+
+	</body>
+</html>

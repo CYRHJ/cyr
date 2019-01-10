@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//创建对象
+			//refs 获取真实的dom节点
+			let LikeButton = React.createClass({
+				clickFun:function(){
+					console.log(this.refs);
+					this.refs.input2.focus();
+				},
+				render:function(){
+					return (
+						<div>
+							<h1>我的表单</h1>
+							<input type="text" ref="input1" />
+							<input type="text" ref="input2" />
+						
+							<button ref="bbb" onClick={this.clickFun}>点击设置文本框的光标</button>			
+						</div>
+					)
+				}
+				
+			})
+			
+			
+			ReactDOM.render(<LikeButton />,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

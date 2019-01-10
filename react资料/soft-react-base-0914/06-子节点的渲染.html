@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>子节点的渲染</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//map 来做循环的好处，可以兼容 三种类型的数据：undefined,object,array
+			let Note = React.createClass({
+				render:function(){
+					console.log(this.props.children);//this.props.children 接收的子节点的内容 
+					console.log(React.Children);
+					return <ul>{
+						React.Children.map(this.props.children,function(item){
+							return <li>{item}</li>
+							
+						})
+					}</ul>
+				}
+			})
+			
+			//渲染
+			ReactDOM.render(<Note>
+				<span>天涯何处无芳草</span>
+				<span>何必单恋一枝花</span>
+			</Note>,document.getElementById('exap'))
+		</script>
+
+	</body>
+</html>

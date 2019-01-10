@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		
+	</head>
+	<body>
+		<div id="exap" class="myClass"></div>
+		<script type="text/babel">
+			//创建对象
+			let LikeButton = React.createClass({
+				//设置初始值
+				getInitialState:function(){
+					return {
+						value:'花儿'
+					}
+					
+				},
+				changeText:function(event){
+					this.setState({
+						value:event.target.value
+					})
+					
+					
+				},
+				render:function(){
+					return (
+						<div>
+							<h1>我的表单</h1>
+							<input type="text" value={this.state.value} onChange={this.changeText}/>
+							<div>{this.state.value}</div>
+						</div>
+					)
+				}
+				
+			})
+			
+			
+			ReactDOM.render(<LikeButton />,document.getElementById('exap'));
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,ul,ol,li,pre,button,input,textarea{margin: 0;padding: 0;}
+        ul li{list-style: none;}
+        body{font-size: 12px;color:#000;background: #eee;}
+        a{text-decoration: none;}
+		a:hover{color: #000;}
+        top_box{}
+        .find{width: 100%;height: 42px;background: white;display: flex;justify-content: space-between;position: fixed;top: 0;}
+        .find img{width: 17px;height: 20px;margin-top: 10px;margin: 10px;}
+        .find div{width: 70%;height: 28px;border: 1px solid #cccccc;border-radius: 20px;position: fixed;top:7px;left:60px;}
+        .find div input{width: 220px;height: 28px;border: none;position: fixed;left: 70px;}
+        .nav{width: 100%;display: flex;justify-content: space-around;background: white;position: fixed;top: 42px;}
+        .nav li{height: 40px;font-size: 18px;line-height: 40px;}
+        .top_picture img{width: 375px;margin-top: 82px;}
+        .Four_img{display: flex;}
+        .Four_img img{width: 25%;height: 94px;}
+        .Two_img img{width: 50%;}
+        .item img{width: 95px;}
+        .list{display: flex;overflow-y: hidden;}
+        .item span{display: inline-block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:95px;}
+    </style>
+</head>
+<body>
+    <div id="exap"></div>
+    <script type="text/babel">
+        let Wibsite=React.createClass({
+            render:function () {
+                return <div>
+                    <Header/>
+                    <Four_img/>
+                    <Lunbo url={this.props.url}/>
+                </div>
+            }
+        });
+        let Header =React.createClass({
+            render:function(){
+                return<div>
+                 <div className="top_box">
+                    <div className="find">
+                        <img src="./img/下载.png"/>
+                        <img src="./img/shopping.png"/>
+                        <div>
+                            <input/>
+                        </div>
+                    </div>         
+                </div>
+                <div className="">
+                    <ul className="nav">
+                        <li>今日推荐</li>
+                        <li>面膜中心</li>   
+                        <li>居家生活</li>
+                        <li>购全球</li>
+                    </ul>
+                </div>
+                <div className="top_picture">
+                    <img src="./img/top.png"/>
+                </div>
+            </div>
+            }
+        });
+        let Four_img=React.createClass({
+            render:function(){
+                return <div>
+                    <div className="Four_img">
+                        <img src="./img/1.png"/>
+                        <img src="./img/2.png"/>
+                        <img src="./img/3.png"/>
+                        <img src="./img/4.png"/>
+                    </div>
+                    <div className="Two_img">
+                        <img src="./img/6.png"/>
+                        <img src="./img/7.png"/>
+                    </div>
+                </div>
+            }
+        })
+        //创建手动滑动图片组件
+        let Lunbo =React.createClass({
+            getInitialState:function(){
+                return{
+                    Myarr:[]
+                }
+            },
+            componentDidMount:function(){
+                $.get(this.props.url,function(data){
+                    console.log(data.image_url);
+                    this.setState({
+                        Myarr:data.data.specials_item_v_o_s
+                    })
+                }.bind(this))
+            },
+            render:function(){
+                return<ul className="list">
+							{
+								this.state.Myarr.map((item)=>
+                                <li className="item">
+									<img src={item.image_url} />
+                                    <span>{item.item_short_name}</span>
+                                    <p>
+                                        <span>￥{item.promotion_price/100}</span>                                 
+                                    </p>
+								</li>)
+							}
+						</ul>
+            }
+        })
+        //渲染到页面
+        ReactDOM.render(<Wibsite url="https://h5.watsons.com.cn/activity/specials/info?count=8&code=Home_flashSale__Top_Img&device_id=4155d580-0a4b-11e9-9edf-e355c56a73e5"/>,document.getElementById('exap'));
+    </script>
+</body>
+</html>
